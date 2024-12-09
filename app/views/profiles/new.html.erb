@@ -1,0 +1,32 @@
+<h1>Create New Profile</h1>
+
+<%= form_with model: @profile, local: true do |form| %>
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :contact_no, "Contact Number" %>
+    <%= form.text_field :contact_no, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :age %>
+    <%= form.number_field :age, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :gender %>
+    <%= form.select :gender, [["Male", "male"], ["Female", "female"], ["Other", "other"]], {}, class: "form-control" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Create Profile", class: "button primary" %>
+  </div>
+<% end %>
+
+<div class="additional-links">
+  <%= link_to "Show Profile", profile_path(@profile), class: "button secondary" if @profile.persisted? %>
+  <%= link_to "Back to Profiles", profiles_path, class: "button secondary" %>
+</div>

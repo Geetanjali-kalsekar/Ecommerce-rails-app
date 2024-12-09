@@ -1,0 +1,19 @@
+<h1>Profile Details</h1>
+
+<div class="profile-details">
+  <p><strong>Name:</strong> <%= @profile.name %></p>
+  <p><strong>Contact Number:</strong> <%= @profile.contact_no %></p>
+  <p><strong>Age:</strong> <%= @profile.age %></p>
+  <p><strong>Gender:</strong> <%= @profile.gender.capitalize %></p>
+</div>
+
+<div class="actions">
+  <%= link_to "Edit Profile", edit_profile_path(@profile), class: "button" %>
+  <%= link_to "Back to Profiles", profiles_path, class: "button secondary" %>
+</div>
+
+<h1><%= @profile.name %>'s Profile</h1>
+
+<%= link_to 'View Addresses', profile_addresses_path(@profile), class: 'btn btn-primary' %>
+
+<!-- Add additional profile details and links here -->

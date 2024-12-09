@@ -1,0 +1,10 @@
+<h1>Profiles</h1>
+
+<% @profiles.each do |profile| %>
+  <p>
+    <strong>Name:</strong> <%= profile.name %><br>
+    <%= link_to 'Show', profile_path(profile) %>
+  </p>
+<% end %>
+
+<%= link_to 'Create New Profile', new_profile_path %>

@@ -1,0 +1,17 @@
+<h1> Edit Product </h1>
+
+<%= form_with(model: @product, local:true) do|form| %>
+<div>
+	<%= form.label :name %><br>
+	<%= form.text_field :name %>
+</div>
+
+<div>
+	<%= form.label :price %><br>
+	<%= form.number_field :price,step:0.01 %>
+</div>
+
+<div>
+	<%= form.submit 'Update Product' %>
+</div>
+<% end %>

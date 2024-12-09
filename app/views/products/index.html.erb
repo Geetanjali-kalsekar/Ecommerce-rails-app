@@ -1,0 +1,21 @@
+<h1>Product List</h1>
+
+<% @products.each do |product| %>
+  <div>
+    <h3><%= product.name %></h3>
+    <p>Price: <%= product.price %></p>
+    <%= link_to 'Show', product_path(product) %> |
+    <%# <%= link_to 'Edit', edit_product_path(product) %> | 
+    <%= link_to 'Delete', product_path(product), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
+  </div>
+<% end %>
+
+
+
+<%= button_to "Logout", destroy_user_session_path, :method => :delete, :data => 
+{ :no_turbolink => true } %>
+ <%= link_to 'Create Profile', new_profile_path, class: 'btn btn-primary' %>
+
+ |<%= link_to 'New Product', new_product_path(@product),class: 'button' %>|
+
+ <%# <%= link_to 'View Addresses', addresses_path, class: 'button' %> 
