@@ -11,19 +11,16 @@ Rails.application.routes.draw do
   # get "profiles/edit"
   # get "profiles/update"
   # devise_for :users
-
-  
   devise_for :users
-resources :profiles, only: %i[index new create show edit update]
-# resources :addresses, only: [:new, :create, :edit, :update, :show]
-resources :products
-resources :delivery_details, only: %i[new create]
-# resources :profiles do
-#   resources :addresses, only: [:new, :create, :index]
-# end
-resources :profiles do
-  resources :addresses
+
+  root "products#index"
+
+  resources :users, only: [:show] do
+    resources :addresses, only: %i[index new create edit update show]
+    resources :profiles, only: %i[show edit update new create]
+  end
+
+  resources :products
+  resources :delivery_details, only: %i[new create]
 end
 
-root "products#index"
-end

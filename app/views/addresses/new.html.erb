@@ -1,6 +1,7 @@
 <h1>Create New Address</h1>
 
 <%= form_with model: @address, url: profile_addresses_path(@profile), local: true do |form| %>
+
   <div class="field">
     <%= form.label :colony %>
     <%= form.text_field :colony, class: "form-control" %>
@@ -27,3 +28,13 @@
 <% end %>
 
 <%= link_to 'Back to Addresses', profile_addresses_path(@profile), class: 'btn btn-secondary' %>
+
+<% if @address.errors.any? %>
+  <div class="alert alert-danger">
+    <ul>
+      <% @address.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

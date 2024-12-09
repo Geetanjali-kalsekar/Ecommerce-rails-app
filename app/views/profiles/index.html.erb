@@ -1,10 +1,5 @@
 <h1>Profiles</h1>
+<strong>Name:</strong> <%= @profile&.name || 'No User Profile' %><br>
+<%= link_to 'Show', user_profile_path(current_user), class: 'button' %>
 
-<% @profiles.each do |profile| %>
-  <p>
-    <strong>Name:</strong> <%= profile.name %><br>
-    <%= link_to 'Show', profile_path(profile) %>
-  </p>
-<% end %>
-
-<%= link_to 'Create New Profile', new_profile_path %>
+<%= link_to 'Create New Profile', new_user_profile_path(current_user), class: 'button' %>

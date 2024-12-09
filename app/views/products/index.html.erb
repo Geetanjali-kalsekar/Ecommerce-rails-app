@@ -10,12 +10,9 @@
   </div>
 <% end %>
 
+<%= link_to 'Create Profile', user_profiles_path(current_user), class: 'btn btn-primary' %>
 
+|<%= link_to 'New Product', new_product_path(@product),class: 'btn btn-primary' %>|<%= link_to 'View Addresses', user_addresses_path(current_user), class: 'btn btn-primary' %> 
 
 <%= button_to "Logout", destroy_user_session_path, :method => :delete, :data => 
 { :no_turbolink => true } %>
- <%= link_to 'Create Profile', new_profile_path, class: 'btn btn-primary' %>
-
- |<%= link_to 'New Product', new_product_path(@product),class: 'button' %>|
-
- <%# <%= link_to 'View Addresses', addresses_path, class: 'button' %> 

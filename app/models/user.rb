@@ -7,7 +7,9 @@ class User < ApplicationRecord
   has_one :profile, dependent: :destroy
   accepts_nested_attributes_for :profile
 
-  has_one :address, dependent: :destroy
+ # Devise modules (e.g., database_authenticatable, registerable, etc.)
+  
+  has_many :address, dependent: :destroy
   has_many :delivery_details, dependent: :destroy
   has_many :products, through: :delivery_details
 

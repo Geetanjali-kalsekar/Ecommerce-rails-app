@@ -1,47 +1,35 @@
 class AddressesController < ApplicationController
-  before_action :set_address, only: [:edit, :update, :show]
-  before_action :set_profile
+  before_action :set_address
+
   def index
-    @addresses = Address.all
+    @addresses = current_user.address.all
   end
 
   def new
-    @address = Address.new
+    @address = current_user.address.new
   end
 
   def create
-    @address = Address.new(address_params)
+    @address = current_user.address.new(address_params)
+    
     if @address.save
-      redirect_to @address, notice: "Address created successfully."
+      redirect_to addresses_path, notice: 'Address was successfully created.'
     else
-      render :new
-    end
-  end
-
-  def edit
-    @address = Address.find(params[:id])
-  end
-
-  def update
-    if @address.update(address_params)
-      redirect_to @address, notice: "Address updated successfully."
-    else
-      render :edit
+      flash.now[:alert] = 'Address could not be created. Please check the errors below.'
+      render :new, status: :unprocessable_entity
     end
   end
 
   private
-
+  
   def set_address
-    @address = Address.find(params[:id])
+    @address = Address.find_by(id: params[:address_id])
+    if @address.nil?
+      redirect_to address_path, alert: 'Address not found.'
+    end
   end
 
-  def set_profile
-  @profile = Profile.find(params[:profile_id])
-end
-
-
   def address_params
-    params.require(:address).permit(:colony, :city, :pincode,  :country)
+    params.require(:address).permit(:colony, :city, :pincode, :country)
   end
 end

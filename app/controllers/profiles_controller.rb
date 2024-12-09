@@ -2,8 +2,8 @@ class ProfilesController < ApplicationController
   before_action :authenticate_user! # Ensure the user is authenticated
   before_action :set_profile, only: [:edit, :update]
 
- def index
-    @profiles = Profile.all
+  def index
+    @profiles = current_user.profile
   end
 
   def new
@@ -13,47 +13,41 @@ class ProfilesController < ApplicationController
   def create
     @profile = current_user.build_profile(profile_params)
     if @profile.save
-      redirect_to profile_path(@profile), notice: 'Profile created successfully.'
+      redirect_to user_profile_path(current_user), notice: 'Profile was successfully created.'
     else
       render :new
     end
   end
 
   def show
-    @profile = Profile.find(params[:id])
+    @profile = current_user.profile
+    redirect_to new_user_profile_path(current_user) unless @profile
   end
 
   def edit
-    @profile = Profile.find(params[:id])
+    @profile = current_user.profile
   end
 
-    def update
-    @profile = Profile.find(params[:id])
+  def update
+    @profile = current_user.profile
     if @profile.update(profile_params)
-      redirect_to @profile, notice: "Profile updated successfully."
+      redirect_to user_profile_path(current_user), notice: 'Profile was successfully updated.'
     else
       render :edit
     end
   end
 
   def set_profile
-  @profile = current_user.profile # Assuming each user has one profile
-end
-  
-    def update
-    @profile = Profile.find(params[:id])
-    if @profile.update(profile_params)
-      redirect_to @profile, notice: "Profile updated successfully."
-    else
-      render :edit
-    end
+    @profile = current_user.profile
   end
-
 
   private
 
+  def set_profile
+    @profile = current_user.profile
+  end
+
   def profile_params
     params.require(:profile).permit(:name, :contact_no, :age, :gender)
-  end
-  
+  end 
 end

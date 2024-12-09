@@ -1,12 +1,13 @@
 <%# <h1>Addresses for <%= @profile %>
 
-<% if @addresses.any? %>
+<% if @addresses %>
   <ul>
     <% @addresses.each do |address| %>
       <li>
         <%= address.colony %>, <%= address.city %>, <%= address.country %> - <%= address.pincode %>
-        <%= link_to 'Edit', edit_profile_address_path(@profile, address) %> |
-        <%= link_to 'Delete', profile_address_path(@profile, address), method: :delete, data: { confirm: 'Are you sure you want to delete this address?' } %>
+        <%= link_to 'Add address', address_path(address) %> |
+        <%= link_to 'Edit', edit_address_path(address) %> |
+        <%= link_to'Delete', address_path(address), method: :delete, data: { confirm: 'Are you sure you want to delete this address?' } %>
       </li>
     <% end %>
   </ul>
@@ -14,4 +15,4 @@
   <p>No addresses added yet.</p>
 <% end %>
 
-<%= link_to 'Add New Address', new_profile_address_path(@profile), class: 'btn btn-primary' %>
+<%# <%= link_to 'Add New Address', new_profile_address_path(@profile), class: 'btn btn-primary' %> %>
